@@ -1,0 +1,363 @@
+<!-- @dsCard group="Pages" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Case studies by [YOUR NAME] — the decisions behind the outcomes, not just the final screens.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work — [YOUR NAME]">
+<meta property="og:description" content="Case studies by [YOUR NAME] — the decisions behind the outcomes, not just the final screens.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191A23'/%3E%3C/svg%3E">
+<title>Work</title>
+<style>
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('fonts/SpaceGrotesk-Variable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Material Symbols Rounded';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/MaterialSymbolsRounded-Outline.woff2') format('woff2');
+  }
+  .material-symbols-rounded {
+    font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal;
+    display: inline-block; line-height: 1; letter-spacing: normal; text-transform: none;
+    white-space: nowrap; word-wrap: normal; direction: ltr; vertical-align: middle;
+  }
+  :root {
+    --color-accent: #FF9900;
+    --color-accent-hover: #E68A00;
+    --color-dark: #191A23;
+    --color-dark-soft: #2B2C38;
+    --color-light: #F3F3F3;
+    --color-white: #FFFFFF;
+    --color-text: #191A23;
+    --color-text-muted: #6B6B76;
+    --color-border: #E2E2E2;
+    --font-family: 'Space Grotesk', sans-serif;
+
+    --text-h1: 700 60px/1.1 var(--font-family);
+    --text-h4: 600 20px/1.3 var(--font-family);
+    --text-h1-mobile: 700 32px/1.15 var(--font-family);
+    --text-h4-mobile: 600 18px/1.3 var(--font-family);
+
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-full: 999px;
+
+    --shadow-sm: 0 2px 8px rgba(25, 26, 35, 0.06);
+    --shadow-md: 0 8px 24px rgba(25, 26, 35, 0.1);
+    --shadow-lg: 0 16px 40px rgba(25, 26, 35, 0.16);
+
+    --duration-fast: 120ms;
+    --duration-base: 220ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-family); color: var(--color-text); background: var(--color-light); -webkit-font-smoothing: antialiased; }
+  a { color: var(--color-dark); }
+  a:hover { color: var(--color-dark-soft); text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--color-accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 999;
+    background: var(--color-accent); color: var(--color-dark);
+    padding: 12px 20px; font-weight: 700; border-radius: 0 0 12px 0;
+  }
+  .skip-link:focus { left: 0; }
+
+  #root { min-height: 100vh; }
+
+  .site-header { position: sticky; top: 0; z-index: 50; padding: 16px 20px 0; background: var(--color-light); }
+  .navbar {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    max-width: 1240px; margin: 0 auto; padding: 12px 20px; border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border); background: var(--color-white);
+  }
+  .logo { font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 8px; color: var(--color-dark); }
+  .logo:hover { color: var(--color-dark); text-decoration: none; }
+  .logo-mark { width: 20px; height: 20px; background: var(--color-dark); border-radius: 6px; display: inline-block; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 24px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--color-text); }
+  .nav-links a.active { font-weight: 700; color: var(--color-dark); box-shadow: inset 0 -3px 0 0 var(--color-accent); }
+  .navbar-actions { display: flex; align-items: center; gap: 10px; }
+  .lang-toggle {
+    background: var(--color-light); border: 1px solid var(--color-border); color: var(--color-dark);
+    font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: var(--radius-full);
+    cursor: pointer; font-family: var(--font-family);
+    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .lang-toggle:hover { background: var(--color-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .lang-toggle:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  .cta-btn {
+    background: var(--color-dark); color: var(--color-white); font-weight: 600; font-size: 13px;
+    padding: 10px 20px; border-radius: var(--radius-full); text-decoration: none; white-space: nowrap;
+    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .cta-btn:hover { background: var(--color-dark-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-white); text-decoration: none; }
+  .cta-btn:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+
+  .menu-btn {
+    display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+    border-radius: var(--radius-full); border: none; background: var(--color-light); cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+  .menu-btn:hover { background: var(--color-border); transform: translateY(-2px); }
+  .menu-btn:active { transform: translateY(0) scale(0.97); }
+  .menu-btn .material-symbols-rounded { font-size: 22px; }
+  .navbar-actions .menu-btn { display: none; }
+
+  .mobile-drawer {
+    position: fixed; inset: 0; background: var(--color-white); z-index: 200;
+    display: flex; flex-direction: column; padding: 20px;
+    transform: translateY(-100%);
+    transition: transform var(--duration-base) var(--ease-in-out);
+  }
+  .mobile-drawer.is-open { transform: translateY(0); }
+  .mobile-drawer-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 16px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border);
+  }
+  .mobile-drawer-links { display: flex; flex-direction: column; gap: 2px; }
+  .mobile-drawer-links a {
+    text-decoration: none; color: var(--color-text); font-size: 18px; font-weight: 600;
+    padding: 14px 10px; border-radius: var(--radius-md); transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  .mobile-drawer-links a:hover { background: var(--color-light); text-decoration: none; color: var(--color-text); }
+  .mobile-drawer-links a.active { color: var(--color-accent); }
+  .mobile-drawer-lang { align-self: flex-start; margin: 14px 10px 0; }
+  .mobile-drawer-cta { margin-top: auto; text-align: center; }
+
+  .ph-box {
+    background: repeating-linear-gradient(135deg, #e2e2e2 0 10px, #ececec 10px 20px);
+    border: 1px dashed #b8b8b8; color: var(--color-text-muted);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 13px; font-weight: 600; border-radius: var(--radius-md);
+  }
+
+  .work-hero { max-width: 1240px; margin: 0 auto; padding: 64px 24px 16px; }
+  .work-hero h1 { margin: 0 0 16px; font: var(--text-h1); }
+  .work-hero p { margin: 0; font: var(--text-h4); font-weight: 400; color: var(--color-text-muted); max-width: 640px; }
+
+  .section { max-width: 1240px; margin: 0 auto; padding: 32px 24px 100px; }
+  .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+  .case-card {
+    text-decoration: none; color: var(--color-dark); display: flex; flex-direction: column; gap: 16px;
+    background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+    overflow: hidden; padding-bottom: 22px;
+    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+  }
+  .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); text-decoration: none; color: var(--color-dark); }
+  .case-card .ph-box { height: 200px; border-radius: 20px 20px 0 0; border-width: 0 0 1px 0; }
+  .case-card-body { padding: 0 22px; display: flex; flex-direction: column; gap: 8px; }
+  .case-card-title { font-size: 18px; font-weight: 600; }
+  .case-card-result { font-size: 14px; color: var(--color-text-muted); }
+
+  .skel { border-radius: 8px; background: linear-gradient(90deg, var(--color-light) 25%, #ebebeb 37%, var(--color-light) 63%); background-size: 400% 100%; animation: shimmer 1.4s ease infinite; }
+  @keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+  .skeleton-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; padding-bottom: 22px; }
+  .skeleton-card .skel-cover { height: 200px; border-radius: 0; }
+  .skeleton-card-body { padding: 20px 22px 0; display: flex; flex-direction: column; gap: 10px; }
+  .skeleton-card .skel-line-1 { height: 14px; width: 60%; }
+  .skeleton-card .skel-line-2 { height: 10px; width: 90%; }
+
+  .site-footer { background: var(--color-dark); color: rgba(255, 255, 255, .85); padding: 48px 24px 32px; }
+  .footer-top { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  .footer-brand { margin: 0; font-weight: 700; color: var(--color-white); }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .footer-links a { color: rgba(255, 255, 255, .85); text-decoration: none; font-size: 14px; }
+  .footer-lang-toggle {
+    background: transparent; border: 1px solid rgba(255, 255, 255, .4); color: var(--color-white);
+    font-weight: 700; font-size: 13px; padding: 6px 14px; border-radius: var(--radius-full);
+    cursor: pointer; font-family: var(--font-family);
+    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+  .footer-lang-toggle:hover { background: rgba(255, 255, 255, .1); transform: translateY(-2px); }
+  .footer-lang-toggle:active { transform: translateY(0) scale(0.97); }
+  .copyright { max-width: 1240px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .15); font-size: 13px; color: rgba(255, 255, 255, .5); }
+
+  @keyframes pageLoadingSlide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+
+  @media (max-width: 640px) {
+    :root { --text-h1: var(--text-h1-mobile); --text-h4: var(--text-h4-mobile); }
+    .nav-links, .navbar-actions .lang-toggle, .navbar-actions .cta-btn { display: none; }
+    .navbar-actions .menu-btn { display: flex; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link" id="skipLink">Skip to content</a>
+<noscript>
+  <div style="max-width:640px;margin:80px auto;padding:0 24px;text-align:center;font-family:'Space Grotesk',sans-serif;">
+    <p style="font-size:18px;font-weight:600;margin:0 0 8px;color:#191A23;">This page needs JavaScript to show its content. · Esta página precisa de JavaScript para mostrar o conteúdo.</p>
+    <p style="font-size:15px;margin:0;color:#6B6B76;">Please enable JavaScript in your browser. · Por favor, ative o JavaScript no seu navegador.</p>
+  </div>
+</noscript>
+
+<div id="root">
+  <header class="site-header">
+    <nav aria-label="Primary" class="navbar">
+      <a href="index.html" class="logo" id="brandNameNav"><span class="logo-mark"></span><span></span></a>
+      <ul class="nav-links">
+        <li><a href="work.html" aria-current="page" class="active" id="navWork"></a></li>
+        <li><a href="about.html" id="navAbout"></a></li>
+        <li><a href="contact.html" id="navContact"></a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button class="lang-toggle" id="langToggleTop"></button>
+        <a href="mailto:[EMAIL]" class="cta-btn" id="ctaTop"></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="material-symbols-rounded" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-head">
+      <span class="logo" aria-hidden="true"><span class="logo-mark"></span><span id="drawerBrandName"></span></span>
+      <button class="menu-btn" id="menuCloseBtn" aria-label="Close menu">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <nav class="mobile-drawer-links" aria-label="Primary">
+      <a href="work.html" aria-current="page" class="active" id="drawerNavWork"></a>
+      <a href="about.html" id="drawerNavAbout"></a>
+      <a href="contact.html" id="drawerNavContact"></a>
+    </nav>
+    <button class="lang-toggle mobile-drawer-lang" id="langToggleDrawer"></button>
+    <a href="mailto:[EMAIL]" class="cta-btn mobile-drawer-cta" id="ctaDrawer"></a>
+  </div>
+
+  <main id="main">
+    <section class="work-hero">
+      <h1 id="heading"></h1>
+      <p id="intro"></p>
+    </section>
+
+    <section class="section" aria-label="">
+      <div class="cases-grid" id="casesGrid" aria-busy="true"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <p class="footer-brand" id="brandNameFooter"></p>
+      <nav aria-label="Footer" class="footer-links">
+        <a href="mailto:[EMAIL]" id="footerEmail">[EMAIL]</a>
+        <a href="[LINK DO LINKEDIN]" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="[LINK DO CV EM PDF]" target="_blank" rel="noopener" id="footerCv"></a>
+        <button class="footer-lang-toggle" id="langToggleBottom"></button>
+      </nav>
+    </div>
+    <p class="copyright" id="copyright"></p>
+  </footer>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  var COPY = {
+    en: {
+      skip: 'Skip to content', brandName: '[YOUR NAME]', work: 'Work', about: 'About', contact: 'Contact',
+      toggle: 'PT', toggleAria: 'Switch to Portuguese', getInTouch: 'Say hello',
+      heading: 'Work', intro: "A few projects I'm proud of. In each one I walk you through the decisions behind the outcome — not just the final screens.",
+      cv: 'CV (PDF)', copyright: '© 2026 [YOUR NAME]. All rights reserved.'
+    },
+    pt: {
+      skip: 'Ir para o conteúdo', brandName: '[SEU NOME]', work: 'Trabalhos', about: 'Sobre', contact: 'Contato',
+      toggle: 'EN', toggleAria: 'Mudar para inglês', getInTouch: 'Vamos conversar',
+      heading: 'Trabalhos', intro: 'Alguns projetos de que tenho orgulho. Em cada um, conto as decisões por trás do resultado — não só as telas finais.',
+      cv: 'CV (PDF)', copyright: '© 2026 [SEU NOME]. Todos os direitos reservados.'
+    }
+  };
+
+  // Cases 4 and 5 are built (see case-study.html?case=4/5) but hidden by
+  // default — flip `visible` to true when ready to publish them.
+  var CASES_RAW = [
+    { id: 1, visible: true },
+    { id: 2, visible: true },
+    { id: 3, visible: true },
+    { id: 4, visible: false },
+    { id: 5, visible: false }
+  ];
+
+  var TITLES = {
+    en: function (id) { return { title: '[CASE ' + id + ': TITLE]', result: '[CASE ' + id + ': RESULT/METRIC]', imgAlt: 'Placeholder cover image for case study ' + id }; },
+    pt: function (id) { return { title: '[CASE ' + id + ': TÍTULO]', result: '[CASE ' + id + ': RESULTADO/MÉTRICA]', imgAlt: 'Placeholder da imagem de capa do case ' + id }; }
+  };
+
+  var state = { lang: SiteCraft.detectLang(), loading: true };
+
+  var els = Object.assign(SiteCraft.queryChromeEls(), {
+    heading: document.getElementById('heading'),
+    intro: document.getElementById('intro'),
+    casesGrid: document.getElementById('casesGrid')
+  });
+
+  function renderCasesGrid() {
+    var grid = els.casesGrid;
+    grid.innerHTML = '';
+    if (state.loading) {
+      grid.setAttribute('aria-busy', 'true');
+      for (var i = 0; i < 3; i++) {
+        var card = document.createElement('div');
+        card.className = 'skeleton-card';
+        card.setAttribute('aria-hidden', 'true');
+        card.innerHTML = '<div class="skel skel-cover"></div><div class="skeleton-card-body"><div class="skel skel-line-1"></div><div class="skel skel-line-2"></div></div>';
+        grid.appendChild(card);
+      }
+      return;
+    }
+    grid.setAttribute('aria-busy', 'false');
+    CASES_RAW.filter(function (c) { return c.visible; }).forEach(function (c) {
+      var meta = TITLES[state.lang](c.id);
+      var a = document.createElement('a');
+      a.className = 'case-card';
+      a.href = 'case-study.html?case=' + c.id;
+      a.innerHTML = '<div class="ph-box" role="img" data-hero="true" aria-label="' + meta.imgAlt + '">[IMAGEM]</div>' +
+        '<div class="case-card-body"><span class="case-card-title">' + meta.title + '</span><span class="case-card-result">' + meta.result + '</span></div>';
+      grid.appendChild(a);
+    });
+  }
+
+  function render() {
+    var L = COPY[state.lang];
+    document.documentElement.lang = state.lang === 'pt' ? 'pt-BR' : 'en';
+    document.title = L.heading + ' — ' + L.brandName;
+
+    SiteCraft.renderChrome(els, L);
+
+    els.heading.textContent = L.heading;
+    els.intro.textContent = L.intro;
+
+    renderCasesGrid();
+  }
+
+  function toggleLang() {
+    state.lang = state.lang === 'pt' ? 'en' : 'pt';
+    SiteCraft.setLang(state.lang);
+    render();
+  }
+  SiteCraft.wireLangToggle(els, toggleLang);
+  SiteCraft.wireDrawer(els);
+
+  render();
+  setTimeout(function () { state.loading = false; render(); }, 320);
+
+  SiteCraft.initPageTransitions();
+  SiteCraft.fadeInRoot(document.getElementById('root'));
+})();
+</script>
+</body>
+</html>
