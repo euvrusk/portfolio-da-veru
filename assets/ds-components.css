@@ -115,3 +115,19 @@
 .card-text-muted { color: var(--color-text-muted); }
 .card-icon .material-symbols-rounded { font-size: 22px; }
 .card-link .material-symbols-rounded { font-size: 16px; }
+
+/* from navigation.html (tabs + breadcrumb) */
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--color-border); }
+.tab { padding: 10px 4px; font-size: 14px; font-weight: 600; color: var(--color-text-muted); position: relative; margin-right: 20px; cursor: pointer; transition: color var(--duration-fast) var(--ease-out); }
+.tab:hover { color: var(--color-dark); }
+.tab.active { color: var(--color-dark); }
+.tab::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--color-accent);
+  transform: scaleX(0); transform-origin: left; transition: transform var(--duration-fast) var(--ease-out);
+}
+.tab.active::after { transform: scaleX(1); }
+
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-muted); }
+.breadcrumb a { color: var(--color-text-muted); text-decoration: none; transition: color var(--duration-fast) var(--ease-out); }
+.breadcrumb a:hover { color: var(--color-dark); }
+.breadcrumb .current { color: var(--color-dark); font-weight: 600; }

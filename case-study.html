@@ -116,9 +116,24 @@
   .mobile-drawer-links a:hover { text-decoration: none; color: var(--color-text); }
   .mobile-drawer-lang { align-self: flex-start; margin: 14px 10px 0; }
 
-  .breadcrumb { max-width: 900px; margin: 32px auto 0; padding: 0 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-muted); }
-  .breadcrumb a { text-decoration: none; color: var(--color-text-muted); }
-  .breadcrumb .current { color: var(--color-dark); font-weight: 600; }
+  /* .breadcrumb/.tabs = base do DS (assets/ds-components.css). A demo do DS gruda o
+     bloco dentro de um painel com scroll proprio; aqui adaptamos pra grudar na pagina
+     inteira, logo abaixo do .site-header (que ja e sticky) — ver initCaseTabs() abaixo. */
+  .sticky-header {
+    position: sticky; z-index: 40; margin-top: 32px; background: var(--color-light);
+    transition: box-shadow var(--duration-base) var(--ease-out);
+  }
+  .sticky-header.is-stuck { box-shadow: var(--shadow-sm); }
+  .sticky-breadcrumb {
+    max-width: 900px; margin: 0 auto; padding: 14px 24px 10px;
+    transition: padding var(--duration-base) var(--ease-out), font-size var(--duration-base) var(--ease-out);
+  }
+  .sticky-header.is-stuck .sticky-breadcrumb { padding: 7px 24px 5px; font-size: 11px; }
+  .sticky-tabs { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-header { transition: box-shadow var(--duration-fast) linear; }
+    .sticky-breadcrumb { transition: padding var(--duration-fast) linear, font-size var(--duration-fast) linear; }
+  }
 
   .case-hero { max-width: 900px; margin: 0 auto; padding: 24px 24px 0; }
   .case-hero h1 { margin: 0 0 12px; font: var(--text-h1); }
@@ -182,6 +197,9 @@
     :root { --text-h1: var(--text-h1-mobile); --text-h3: var(--text-h3-mobile); --text-h4: var(--text-h4-mobile); }
     .nav-links, .navbar-actions .lang-toggle, .navbar-actions .nav-cta { display: none; }
     .navbar-actions .menu-btn { display: flex; }
+    .sticky-tabs { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .sticky-tabs::-webkit-scrollbar { display: none; }
+    .tab { margin-right: 16px; white-space: nowrap; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
@@ -233,9 +251,18 @@
   </div>
 
   <main id="main">
-    <nav aria-label="Breadcrumb" class="breadcrumb">
-      <a href="work.html" id="breadcrumbWork"></a><span aria-hidden="true">/</span><span class="current" id="breadcrumbTitle"></span>
-    </nav>
+    <div class="sticky-header" id="stickyHeader">
+      <nav aria-label="Breadcrumb" class="breadcrumb sticky-breadcrumb">
+        <a href="work.html" id="breadcrumbWork"></a><span aria-hidden="true">/</span><span class="current" id="breadcrumbTitle"></span>
+      </nav>
+      <div class="tabs sticky-tabs" id="caseTabs" role="tablist" aria-label="Case sections">
+        <span class="tab active" role="tab" data-target="setupSection" id="tabSetup"></span>
+        <span class="tab" role="tab" data-target="roleSection" id="tabRole"></span>
+        <span class="tab" role="tab" data-target="processSection" id="tabProcess"></span>
+        <span class="tab" role="tab" data-target="resultSection" id="tabResult"></span>
+        <span class="tab" role="tab" data-target="reflectionSection" id="tabReflection"></span>
+      </div>
+    </div>
 
     <header class="case-hero">
       <h1 id="heroTitle"></h1>
@@ -245,29 +272,29 @@
     <div class="ph-box cover-box" role="img" id="coverBox">[IMAGEM]</div>
 
     <article class="case-article">
-      <section class="case-section" aria-labelledby="setup-h">
+      <section class="case-section" id="setupSection" aria-labelledby="setup-h">
         <h2 id="setup-h" data-i18n-heading="setupHeading"></h2>
         <p id="setupText"></p>
       </section>
 
-      <section class="case-section" aria-labelledby="role-h">
+      <section class="case-section" id="roleSection" aria-labelledby="role-h">
         <h2 id="role-h" data-i18n-heading="roleHeading"></h2>
         <p id="roleText"></p>
       </section>
 
-      <section class="case-section" aria-labelledby="process-h">
+      <section class="case-section" id="processSection" aria-labelledby="process-h">
         <h2 id="process-h" data-i18n-heading="processHeading"></h2>
         <p class="process-intro" id="processIntro"></p>
         <div class="decisions-grid" id="decisionsGrid"></div>
         <div class="ph-box artifact-box" role="img" id="artifactBox">[ARTEFATO]</div>
       </section>
 
-      <section class="case-section" aria-labelledby="result-h">
+      <section class="case-section" id="resultSection" aria-labelledby="result-h">
         <h2 id="result-h" data-i18n-heading="resultHeading"></h2>
         <p id="resultText"></p>
       </section>
 
-      <section class="case-section" aria-labelledby="reflection-h">
+      <section class="case-section" id="reflectionSection" aria-labelledby="reflection-h">
         <h2 id="reflection-h" data-i18n-heading="reflectionHeading"></h2>
         <p id="reflectionText"></p>
       </section>
@@ -309,7 +336,8 @@
       setupHeading: 'The situation', roleHeading: 'What I did (and what I couldn’t change)', processHeading: 'How I got there: decisions & trade-offs',
       processIntro: 'What I tried first, what didn’t work, and where I changed my mind.', artifactAlt: 'Placeholder for sketches, wireframes, or flow diagrams',
       resultHeading: 'What changed', reflectionHeading: 'Looking back', aiHeading: 'Where AI helped',
-      moreCasesLabel: 'More case studies', backToWork: '← See other projects'
+      moreCasesLabel: 'More case studies', backToWork: '← See other projects',
+      tabSetup: 'Situation', tabRole: 'Role', tabProcess: 'Process', tabResult: 'Result', tabReflection: 'Reflection'
     },
     pt: {
       skip: 'Ir para o conteúdo', brandName: '[SEU NOME]', work: 'Trabalhos', about: 'Sobre', contact: 'Contato',
@@ -318,7 +346,8 @@
       setupHeading: 'A situação', roleHeading: 'O que eu fiz (e o que eu não podia mudar)', processHeading: 'Como cheguei lá: decisões e trade-offs',
       processIntro: 'O que testei primeiro, o que não funcionou e onde mudei de ideia.', artifactAlt: 'Placeholder para sketches, wireframes ou fluxos',
       resultHeading: 'O que mudou', reflectionHeading: 'Olhando para trás', aiHeading: 'Onde a IA ajudou',
-      moreCasesLabel: 'Mais cases', backToWork: '← Ver outros projetos'
+      moreCasesLabel: 'Mais cases', backToWork: '← Ver outros projetos',
+      tabSetup: 'Situação', tabRole: 'Papel', tabProcess: 'Processo', tabResult: 'Resultado', tabReflection: 'Reflexão'
     }
   };
 
@@ -366,7 +395,12 @@
     aiText: document.getElementById('aiText'),
     moreCasesNav: document.getElementById('moreCasesNav'),
     backToWork: document.getElementById('backToWork'),
-    ctaBottom: document.getElementById('ctaBottom')
+    ctaBottom: document.getElementById('ctaBottom'),
+    tabSetup: document.getElementById('tabSetup'),
+    tabRole: document.getElementById('tabRole'),
+    tabProcess: document.getElementById('tabProcess'),
+    tabResult: document.getElementById('tabResult'),
+    tabReflection: document.getElementById('tabReflection')
   });
   var headings = document.querySelectorAll('[data-i18n-heading]');
 
@@ -408,6 +442,12 @@
     els.moreCasesNav.setAttribute('aria-label', L.moreCasesLabel);
     els.backToWork.textContent = L.backToWork;
 
+    els.tabSetup.textContent = L.tabSetup;
+    els.tabRole.textContent = L.tabRole;
+    els.tabProcess.textContent = L.tabProcess;
+    els.tabResult.textContent = L.tabResult;
+    els.tabReflection.textContent = L.tabReflection;
+
     headings.forEach(function (h) {
       h.textContent = L[h.getAttribute('data-i18n-heading')];
     });
@@ -435,6 +475,58 @@
   SiteCraft.wireDrawer(els);
 
   render();
+
+  // Adaptado de design-system/components/navigation.html initStickyTabs(): a demo
+  // gruda o bloco dentro de um painel com scroll proprio (frame.scrollTop); aqui a
+  // pagina inteira rola, entao ouvimos window/scrollY e compensamos a altura do
+  // .site-header (que ja e sticky) em vez de usar o offset fixo da demo.
+  (function initCaseTabs() {
+    var siteHeader = document.querySelector('.site-header');
+    var header = document.getElementById('stickyHeader');
+    var tabsBar = document.getElementById('caseTabs');
+    var tabs = tabsBar.querySelectorAll('.tab');
+
+    function reduceMotion() {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    function syncOffset() {
+      header.style.top = siteHeader.offsetHeight + 'px';
+    }
+    syncOffset();
+    window.addEventListener('resize', syncOffset);
+
+    var ticking = false;
+    function onScroll() {
+      header.classList.toggle('is-stuck', window.scrollY > siteHeader.offsetHeight + 4);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+
+    tabsBar.addEventListener('click', function (e) {
+      var tab = e.target.closest('.tab');
+      if (!tab) return;
+      var section = document.getElementById(tab.dataset.target);
+      var top = section.getBoundingClientRect().top + window.scrollY - siteHeader.offsetHeight - header.offsetHeight;
+      window.scrollTo({ top: top, behavior: reduceMotion() ? 'auto' : 'smooth' });
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var target = tabsBar.querySelector('[data-target="' + entry.target.id + '"]');
+        if (!target) return;
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        target.classList.add('active');
+      });
+    }, { rootMargin: '-' + (siteHeader.offsetHeight + header.offsetHeight + 1) + 'px 0px -60% 0px', threshold: 0 });
+
+    ['setupSection', 'roleSection', 'processSection', 'resultSection', 'reflectionSection'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  })();
 
   SiteCraft.initPageTransitions();
   SiteCraft.fadeInRoot(document.getElementById('root'));
