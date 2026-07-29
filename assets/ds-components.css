@@ -1,0 +1,117 @@
+/* Extracao curada do submodulo design-system/components/*.html — copiadas a mao
+   as regras reais de componente, ignorando a "moldura" de demo de cada arquivo
+   (@font-face, :root local, *, body, h1, .group-label, .row, .device-frame etc).
+   Ao sincronizar (git submodule update --remote design-system), reconferir
+   navigation.html / buttons.html / cards.html contra este arquivo. */
+
+/* from navigation.html */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; border-radius: 999px; border: 1px solid var(--color-border);
+}
+.logo { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.logo-mark { width: 20px; height: 20px; background: var(--color-dark); border-radius: 6px; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--color-text); font-size: 14px; font-weight: 500; transition: color var(--duration-fast) var(--ease-out); }
+.nav-links a:hover { color: var(--color-accent); }
+.nav-links a.active { color: var(--color-accent); }
+.nav-cta {
+  background: var(--color-dark); color: var(--color-white); font-weight: 600;
+  font-size: 13px; padding: 10px 20px; border-radius: 999px; text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.nav-cta:hover { background: var(--color-dark-soft); transform: translateY(-1px); }
+
+.menu-btn {
+  width: 36px; height: 36px; border-radius: 999px; border: none; background: var(--color-light);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.menu-btn:hover { background: var(--color-border); }
+
+/* Nota: no catalogo do DS, .mobile-drawer usa position:absolute/inset:0 dentro de um
+   .device-frame de demonstracao. No portfolio, o drawer cobre a tela inteira, entao
+   cada pagina mantem um override local (position:fixed; inset:0; z-index mais alto)
+   por cima destas regras — isso e especifico do portfolio, nao do componente do DS. */
+.mobile-drawer {
+  background: var(--color-white);
+  display: flex; flex-direction: column; padding: 16px;
+  transform: translateY(-100%);
+  transition: transform var(--duration-base) var(--ease-in-out);
+}
+.mobile-drawer.is-open { transform: translateY(0); }
+.mobile-drawer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 16px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border);
+}
+.mobile-drawer-links { display: flex; flex-direction: column; gap: 2px; }
+.mobile-drawer-links a {
+  text-decoration: none; color: var(--color-text); font-size: 16px; font-weight: 600;
+  padding: 14px 10px; border-radius: 10px; transition: background-color var(--duration-fast) var(--ease-out);
+}
+.mobile-drawer-links a:hover { background: var(--color-light); }
+.mobile-drawer-links a.active { color: var(--color-accent); }
+.mobile-cta { margin-top: auto; text-align: center; }
+
+/* from buttons.html */
+.btn {
+  font-family: var(--font-family);
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+.btn-lg { font-size: 16px; padding: 16px 32px; }
+.btn-md { font-size: 14px; padding: 12px 24px; }
+.btn-sm { font-size: 13px; padding: 8px 18px; }
+
+.btn:not(.btn-disabled):hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.btn:not(.btn-disabled):active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+.btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+.btn-primary { background: var(--color-dark); color: var(--color-white); }
+.btn-primary:hover { background: var(--color-dark-soft); }
+
+.btn-accent { background: var(--color-accent); color: var(--color-dark); }
+.btn-accent:hover { background: var(--color-accent-hover); }
+
+.btn-secondary { background: var(--color-light); color: var(--color-dark); }
+.btn-secondary:hover { background: var(--color-border); }
+
+.btn-outline { background: transparent; color: var(--color-dark); border: 1.5px solid var(--color-dark); }
+.btn-outline:hover { background: var(--color-dark); color: var(--color-white); }
+
+.btn-disabled { background: var(--color-light); color: var(--color-text-muted); cursor: not-allowed; }
+
+/* from cards.html */
+.card {
+  border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 12px;
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.card-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.08); font-size: 20px;
+}
+.card-title { font-size: 17px; font-weight: 600; }
+.card-text { font-size: 14px; line-height: 1.5; }
+.card-link { font-size: 13px; font-weight: 600; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; }
+
+.card-accent { background: var(--color-accent); color: var(--color-dark); }
+.card-dark { background: var(--color-dark); color: var(--color-white); }
+.card-dark .card-icon { background: rgba(255,255,255,0.12); }
+.card-light { background: var(--color-light); color: var(--color-dark); border: 1px solid var(--color-border); }
+.card-outline { background: var(--color-white); color: var(--color-dark); border: 1.5px solid var(--color-border); }
+
+.card-text-muted { color: var(--color-text-muted); }
+.card-icon .material-symbols-rounded { font-size: 22px; }
+.card-link .material-symbols-rounded { font-size: 16px; }
