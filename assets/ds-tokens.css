@@ -55,4 +55,8 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --duration-hero so existe dentro de design-system/components/hero-transition.html,
+     nao no tokens.css canonico do DS — replicado aqui pra nao depender dessa lacuna. */
+  --duration-hero: 420ms;
 }

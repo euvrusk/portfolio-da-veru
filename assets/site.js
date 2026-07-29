@@ -10,7 +10,11 @@ window.SiteCraft = (function () {
 
   var LANG_KEY = 'portfolio_lang';
   var HERO_KEY = 'portfolio_hero_rect';
+  // Mesmo valor de --ease-in-out no design-system/tokens.css.
   var HERO_EASE = 'cubic-bezier(0.65,0,0.35,1)';
+  // 380/340ms abaixo sao intencionalmente diferentes de --duration-hero (420ms,
+  // so existe em design-system/components/hero-transition.html): a versao daqui
+  // navega entre paginas de verdade e foi ajustada a parte da demo do DS.
 
   function reducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -107,7 +111,7 @@ window.SiteCraft = (function () {
     var now = Date.now();
     if (now - lastBurst.t < 150 && Math.abs(x - lastBurst.x) < 12 && Math.abs(y - lastBurst.y) < 12) return;
     lastBurst = { t: now, x: x, y: y };
-    var colors = ['#FF9900', '#191A23'];
+    var colors = ['var(--color-accent)', 'var(--color-dark)'];
     var count = 10;
     for (var i = 0; i < count; i++) {
       (function (i) {
