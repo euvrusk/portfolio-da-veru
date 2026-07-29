@@ -12,6 +12,7 @@
 <title>Work</title>
 <link rel="stylesheet" href="assets/ds-tokens.css">
 <link rel="stylesheet" href="assets/ds-components.css">
+<link rel="stylesheet" href="assets/site-components.css">
 <style>
   @font-face {
     font-family: 'Space Grotesk';
@@ -126,26 +127,6 @@
   .work-hero p { margin: 0; font: var(--text-h4); font-weight: 400; color: var(--color-text-muted); max-width: 640px; }
 
   .section { max-width: 1240px; margin: 0 auto; padding: 32px 24px 100px; }
-  .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-  .case-card {
-    text-decoration: none; color: var(--color-dark); display: flex; flex-direction: column; gap: 16px;
-    background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
-    overflow: hidden; padding-bottom: 22px;
-    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
-  }
-  .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); text-decoration: none; color: var(--color-dark); }
-  .case-card .ph-box { height: 200px; border-radius: 20px 20px 0 0; border-width: 0 0 1px 0; }
-  .case-card-body { padding: 0 22px; display: flex; flex-direction: column; gap: 8px; }
-  .case-card-title { font-size: 18px; font-weight: 600; }
-  .case-card-result { font-size: 14px; color: var(--color-text-muted); }
-
-  .skel { border-radius: 8px; background: linear-gradient(90deg, var(--color-light) 25%, #ebebeb 37%, var(--color-light) 63%); background-size: 400% 100%; animation: shimmer 1.4s ease infinite; }
-  @keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
-  .skeleton-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; padding-bottom: 22px; }
-  .skeleton-card .skel-cover { height: 200px; border-radius: 0; }
-  .skeleton-card-body { padding: 20px 22px 0; display: flex; flex-direction: column; gap: 10px; }
-  .skeleton-card .skel-line-1 { height: 14px; width: 60%; }
-  .skeleton-card .skel-line-2 { height: 10px; width: 90%; }
 
   .site-footer { background: var(--color-dark); color: rgba(255, 255, 255, .85); padding: 48px 24px 32px; }
   .footer-top { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
@@ -302,7 +283,7 @@
     CASES_RAW.filter(function (c) { return c.visible; }).forEach(function (c) {
       var meta = TITLES[state.lang](c.id);
       var a = document.createElement('a');
-      a.className = 'case-card';
+      a.className = 'case-card card card-outline';
       a.href = 'case-study.html?case=' + c.id;
       a.innerHTML = '<div class="ph-box" role="img" data-hero="true" aria-label="' + meta.imgAlt + '">[IMAGEM]</div>' +
         '<div class="case-card-body"><span class="case-card-title">' + meta.title + '</span><span class="case-card-result">' + meta.result + '</span></div>';
