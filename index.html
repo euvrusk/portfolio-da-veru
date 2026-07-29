@@ -10,6 +10,9 @@
 <meta property="og:description" content="[YOUR NAME] — Product Designer portfolio: case studies, decisions, and results.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191A23'/%3E%3C/svg%3E">
 <title>Home</title>
+<link rel="stylesheet" href="assets/ds-tokens.css">
+<link rel="stylesheet" href="assets/ds-components.css">
+<link rel="stylesheet" href="assets/site-components.css">
 <style>
   @font-face {
     font-family: 'Space Grotesk';
@@ -79,16 +82,18 @@
   #root { min-height: 100vh; }
 
   .site-header { position: sticky; top: 0; z-index: 50; padding: 16px 20px 0; background: var(--color-light); }
+  /* Nav/botoes: base vem de assets/ds-components.css (.navbar/.logo/.logo-mark/.nav-links/
+     .nav-cta/.menu-btn/.mobile-drawer*); aqui so o que difere do componente do DS. */
   .navbar {
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    flex-wrap: wrap; gap: 12px;
     max-width: 1240px; margin: 0 auto; padding: 12px 20px; border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border); background: var(--color-white);
+    background: var(--color-white);
   }
-  .logo { font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 8px; color: var(--color-dark); }
+  .logo { text-decoration: none; color: var(--color-dark); }
   .logo:hover { color: var(--color-dark); text-decoration: none; }
-  .logo-mark { width: 20px; height: 20px; background: var(--color-dark); border-radius: 6px; display: inline-block; }
-  .nav-links { display: flex; flex-wrap: wrap; gap: 24px; list-style: none; margin: 0; padding: 0; }
-  .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--color-text); }
+  .logo-mark { display: inline-block; }
+  .nav-links { flex-wrap: wrap; gap: 24px; margin: 0; padding: 0; }
+  .nav-links a.active { font-weight: 700; color: var(--color-dark); box-shadow: inset 0 -3px 0 0 var(--color-accent); }
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
   .lang-toggle {
     background: var(--color-light); border: 1px solid var(--color-border); color: var(--color-dark);
@@ -98,44 +103,20 @@
   }
   .lang-toggle:hover { background: var(--color-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .lang-toggle:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
-  .cta-btn {
-    background: var(--color-dark); color: var(--color-white); font-weight: 600; font-size: 13px;
-    padding: 10px 20px; border-radius: var(--radius-full); text-decoration: none; white-space: nowrap;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .cta-btn:hover { background: var(--color-dark-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-white); text-decoration: none; }
-  .cta-btn:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  .nav-cta { white-space: nowrap; transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out); }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); text-decoration: none; }
+  .nav-cta:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
 
-  .menu-btn {
-    display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
-    border-radius: var(--radius-full); border: none; background: var(--color-light); cursor: pointer;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
-  }
-  .menu-btn:hover { background: var(--color-border); transform: translateY(-2px); }
+  .menu-btn { transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out); }
+  .menu-btn:hover { transform: translateY(-2px); }
   .menu-btn:active { transform: translateY(0) scale(0.97); }
   .menu-btn .material-symbols-rounded { font-size: 22px; }
   .navbar-actions .menu-btn { display: none; }
 
-  .mobile-drawer {
-    position: fixed; inset: 0; background: var(--color-white); z-index: 200;
-    display: flex; flex-direction: column; padding: 20px;
-    transform: translateY(-100%);
-    transition: transform var(--duration-base) var(--ease-in-out);
-  }
-  .mobile-drawer.is-open { transform: translateY(0); }
-  .mobile-drawer-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 16px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border);
-  }
-  .mobile-drawer-links { display: flex; flex-direction: column; gap: 2px; }
-  .mobile-drawer-links a {
-    text-decoration: none; color: var(--color-text); font-size: 18px; font-weight: 600;
-    padding: 14px 10px; border-radius: var(--radius-md); transition: background-color var(--duration-fast) var(--ease-out);
-  }
-  .mobile-drawer-links a:hover { background: var(--color-light); text-decoration: none; color: var(--color-text); }
-  .mobile-drawer-links a.active { color: var(--color-accent); }
+  .mobile-drawer { position: fixed; inset: 0; z-index: 200; padding: 20px; }
+  .mobile-drawer-links a { font-size: 18px; border-radius: var(--radius-md); }
+  .mobile-drawer-links a:hover { text-decoration: none; color: var(--color-text); }
   .mobile-drawer-lang { align-self: flex-start; margin: 14px 10px 0; }
-  .mobile-drawer-cta { margin-top: auto; text-align: center; }
 
   .ph-box {
     background: repeating-linear-gradient(135deg, #e2e2e2 0 10px, #ececec 10px 20px);
@@ -152,37 +133,12 @@
   .hero-availability { margin: 8px 0 0; font-size: 15px; font-weight: 600; color: var(--color-dark); display: flex; align-items: center; gap: 8px; }
   .hero-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-success); display: inline-block; }
   .hero-cta-wrap { margin-top: 12px; }
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--color-accent); color: var(--color-dark);
-    font-weight: 600; font-size: 16px; padding: 16px 32px; border-radius: var(--radius-full); text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .hero-cta:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-dark); text-decoration: none; }
-  .hero-cta:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  /* .hero-cta = .btn .btn-lg .btn-accent do DS; so falta o reset de sublinhado (e' um <a>) */
+  .hero-cta { text-decoration: none; }
+  .hero-cta:hover { text-decoration: none; }
 
   .section { max-width: 1240px; margin: 0 auto; padding: 32px 24px 80px; }
   .section h2 { font: var(--text-h2); margin: 0 0 32px; }
-
-  .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .case-card {
-    text-decoration: none; color: var(--color-dark); display: flex; flex-direction: column; gap: 14px;
-    background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
-    overflow: hidden; padding-bottom: 20px;
-    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
-  }
-  .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); text-decoration: none; color: var(--color-dark); }
-  .case-card .ph-box { height: 180px; border-radius: 20px 20px 0 0; border-width: 0 0 1px 0; }
-  .case-card-body { padding: 0 20px; display: flex; flex-direction: column; gap: 8px; }
-  .case-card-title { font-size: 17px; font-weight: 600; }
-  .case-card-result { font-size: 14px; color: var(--color-text-muted); }
-
-  .skel { border-radius: 8px; background: linear-gradient(90deg, var(--color-light) 25%, #ebebeb 37%, var(--color-light) 63%); background-size: 400% 100%; animation: shimmer 1.4s ease infinite; }
-  @keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
-  .skeleton-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; padding-bottom: 20px; }
-  .skeleton-card .skel-cover { height: 180px; border-radius: 0; }
-  .skeleton-card-body { padding: 18px 20px 0; display: flex; flex-direction: column; gap: 10px; }
-  .skeleton-card .skel-line-1 { height: 13px; width: 60%; }
-  .skeleton-card .skel-line-2 { height: 10px; width: 90%; }
 
   .proof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .testimonial {
@@ -197,32 +153,21 @@
   .about-strip-content { display: flex; flex-direction: column; gap: 16px; }
   .about-strip-content h2 { font: var(--text-h3); margin: 0; }
   .about-strip-content p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--color-text-muted); max-width: 640px; }
-  .about-strip-cta {
-    align-self: flex-start; background: transparent; color: var(--color-dark); border: 1.5px solid var(--color-dark);
-    font-weight: 600; font-size: 14px; padding: 12px 24px; border-radius: var(--radius-full); text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .about-strip-cta:hover { text-decoration: none; color: var(--color-white); background: var(--color-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .about-strip-cta:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  /* .about-strip-cta = .btn .btn-md .btn-outline do DS */
+  .about-strip-cta { align-self: flex-start; text-decoration: none; }
+  .about-strip-cta:hover { text-decoration: none; }
 
   .final-cta { background: var(--color-dark); color: var(--color-white); padding: 72px 24px; text-align: center; }
   .final-cta-inner { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; align-items: center; }
   .final-cta h2 { font: var(--text-h2); margin: 0; }
   .final-cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
-  .final-cta-email {
-    background: var(--color-accent); color: var(--color-dark); font-weight: 600; font-size: 16px;
-    padding: 16px 32px; border-radius: var(--radius-full); text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .final-cta-email:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-dark); text-decoration: none; }
-  .final-cta-email:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
-  .final-cta-linkedin {
-    background: transparent; color: var(--color-white); border: 1.5px solid var(--color-white);
-    font-weight: 600; font-size: 16px; padding: 16px 32px; border-radius: var(--radius-full); text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .final-cta-linkedin:hover { background: var(--color-white); color: var(--color-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); text-decoration: none; }
-  .final-cta-linkedin:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  /* .final-cta-email = .btn .btn-lg .btn-accent do DS */
+  .final-cta-email { text-decoration: none; }
+  .final-cta-email:hover { text-decoration: none; }
+  /* .final-cta-linkedin nao tem variante no DS (outline branco sobre fundo escuro);
+     usa .btn .btn-lg pela mecanica de hover/press e mantem cor propria */
+  .final-cta-linkedin { background: transparent; color: var(--color-white); border: 1.5px solid var(--color-white); text-decoration: none; }
+  .final-cta-linkedin:hover { background: var(--color-white); color: var(--color-dark); text-decoration: none; }
 
   .site-footer { background: var(--color-dark); color: rgba(255, 255, 255, .85); padding: 48px 24px 32px; }
   .footer-top { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
@@ -245,7 +190,7 @@
     :root { --text-h1: var(--text-h1-mobile); --text-h2: var(--text-h2-mobile); }
     .about-strip { grid-template-columns: 1fr; }
     .about-strip-photo { width: 100%; max-width: 240px; }
-    .nav-links, .navbar-actions .lang-toggle, .navbar-actions .cta-btn { display: none; }
+    .nav-links, .navbar-actions .lang-toggle, .navbar-actions .nav-cta { display: none; }
     .navbar-actions .menu-btn { display: flex; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -273,7 +218,7 @@
       </ul>
       <div class="navbar-actions">
         <button class="lang-toggle" id="langToggleTop"></button>
-        <a href="mailto:[EMAIL]" class="cta-btn" id="ctaTop"></a>
+        <a href="mailto:[EMAIL]" class="nav-cta" id="ctaTop"></a>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
           <span class="material-symbols-rounded" aria-hidden="true">menu</span>
         </button>
@@ -294,7 +239,7 @@
       <a href="contact.html" id="drawerNavContact"></a>
     </nav>
     <button class="lang-toggle mobile-drawer-lang" id="langToggleDrawer"></button>
-    <a href="mailto:[EMAIL]" class="cta-btn mobile-drawer-cta" id="ctaDrawer"></a>
+    <a href="mailto:[EMAIL]" class="nav-cta mobile-cta" id="ctaDrawer"></a>
   </div>
 
   <main id="main">
@@ -304,7 +249,7 @@
       <p class="hero-value" id="heroValue"></p>
       <p class="hero-availability"><span class="hero-dot" aria-hidden="true"></span><span id="heroAvailability"></span></p>
       <div class="hero-cta-wrap">
-        <a href="work.html" class="hero-cta" id="heroCta"></a>
+        <a href="work.html" class="btn btn-lg btn-accent hero-cta" id="heroCta"></a>
       </div>
     </section>
 
@@ -323,7 +268,7 @@
       <div class="about-strip-content">
         <h2 id="about-strip-heading" data-i18n="aboutStripHeading"></h2>
         <p data-i18n="aboutStripBody"></p>
-        <a href="about.html" class="about-strip-cta" id="aboutStripCta"></a>
+        <a href="about.html" class="btn btn-md btn-outline about-strip-cta" id="aboutStripCta"></a>
       </div>
     </section>
 
@@ -331,8 +276,8 @@
       <div class="final-cta-inner">
         <h2 id="finalCtaHeading"></h2>
         <div class="final-cta-actions">
-          <a href="mailto:[EMAIL]" class="final-cta-email">[EMAIL]</a>
-          <a href="[LINK DO LINKEDIN]" target="_blank" rel="noopener" class="final-cta-linkedin">LinkedIn</a>
+          <a href="mailto:[EMAIL]" class="btn btn-lg btn-accent final-cta-email">[EMAIL]</a>
+          <a href="[LINK DO LINKEDIN]" target="_blank" rel="noopener" class="btn btn-lg final-cta-linkedin">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -450,7 +395,7 @@
     grid.setAttribute('aria-busy', 'false');
     CASES[state.lang].forEach(function (c) {
       var a = document.createElement('a');
-      a.className = 'case-card';
+      a.className = 'case-card card card-outline';
       a.href = c.href;
       a.innerHTML = '<div class="ph-box" role="img" data-hero="true" aria-label="' + c.imgAlt + '">[IMAGEM]</div>' +
         '<div class="case-card-body"><span class="case-card-title">' + c.title + '</span><span class="case-card-result">' + c.result + '</span></div>';

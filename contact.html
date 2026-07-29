@@ -10,6 +10,9 @@
 <meta property="og:description" content="Get in touch with [YOUR NAME] — email and LinkedIn.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191A23'/%3E%3C/svg%3E">
 <title>Contact</title>
+<link rel="stylesheet" href="assets/ds-tokens.css">
+<link rel="stylesheet" href="assets/ds-components.css">
+<link rel="stylesheet" href="assets/site-components.css">
 <style>
   @font-face {
     font-family: 'Space Grotesk';
@@ -74,16 +77,17 @@
   #root { min-height: 100vh; display: flex; flex-direction: column; }
 
   .site-header { position: sticky; top: 0; z-index: 50; padding: 16px 20px 0; background: var(--color-light); }
+  /* Nav/botoes: base vem de assets/ds-components.css (.navbar/.logo/.logo-mark/.nav-links/
+     .nav-cta/.menu-btn/.mobile-drawer*); aqui so o que difere do componente do DS. */
   .navbar {
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    flex-wrap: wrap; gap: 12px;
     max-width: 1240px; margin: 0 auto; padding: 12px 20px; border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border); background: var(--color-white);
+    background: var(--color-white);
   }
-  .logo { font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 8px; color: var(--color-dark); }
+  .logo { text-decoration: none; color: var(--color-dark); }
   .logo:hover { color: var(--color-dark); text-decoration: none; }
-  .logo-mark { width: 20px; height: 20px; background: var(--color-dark); border-radius: 6px; display: inline-block; }
-  .nav-links { display: flex; flex-wrap: wrap; gap: 24px; list-style: none; margin: 0; padding: 0; }
-  .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--color-text); }
+  .logo-mark { display: inline-block; }
+  .nav-links { flex-wrap: wrap; gap: 24px; margin: 0; padding: 0; }
   .nav-links a.active { font-weight: 700; color: var(--color-dark); box-shadow: inset 0 -3px 0 0 var(--color-accent); }
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
   .lang-toggle {
@@ -94,44 +98,20 @@
   }
   .lang-toggle:hover { background: var(--color-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .lang-toggle:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
-  .cta-btn {
-    background: var(--color-dark); color: var(--color-white); font-weight: 600; font-size: 13px;
-    padding: 10px 20px; border-radius: var(--radius-full); text-decoration: none; white-space: nowrap;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .cta-btn:hover { background: var(--color-dark-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-white); text-decoration: none; }
-  .cta-btn:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  .nav-cta { white-space: nowrap; transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out); }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); text-decoration: none; }
+  .nav-cta:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
 
-  .menu-btn {
-    display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
-    border-radius: var(--radius-full); border: none; background: var(--color-light); cursor: pointer;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
-  }
-  .menu-btn:hover { background: var(--color-border); transform: translateY(-2px); }
+  .menu-btn { transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out); }
+  .menu-btn:hover { transform: translateY(-2px); }
   .menu-btn:active { transform: translateY(0) scale(0.97); }
   .menu-btn .material-symbols-rounded { font-size: 22px; }
   .navbar-actions .menu-btn { display: none; }
 
-  .mobile-drawer {
-    position: fixed; inset: 0; background: var(--color-white); z-index: 200;
-    display: flex; flex-direction: column; padding: 20px;
-    transform: translateY(-100%);
-    transition: transform var(--duration-base) var(--ease-in-out);
-  }
-  .mobile-drawer.is-open { transform: translateY(0); }
-  .mobile-drawer-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 16px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border);
-  }
-  .mobile-drawer-links { display: flex; flex-direction: column; gap: 2px; }
-  .mobile-drawer-links a {
-    text-decoration: none; color: var(--color-text); font-size: 18px; font-weight: 600;
-    padding: 14px 10px; border-radius: var(--radius-md); transition: background-color var(--duration-fast) var(--ease-out);
-  }
-  .mobile-drawer-links a:hover { background: var(--color-light); text-decoration: none; color: var(--color-text); }
-  .mobile-drawer-links a.active { color: var(--color-accent); }
+  .mobile-drawer { position: fixed; inset: 0; z-index: 200; padding: 20px; }
+  .mobile-drawer-links a { font-size: 18px; border-radius: var(--radius-md); }
+  .mobile-drawer-links a:hover { text-decoration: none; color: var(--color-text); }
   .mobile-drawer-lang { align-self: flex-start; margin: 14px 10px 0; }
-  .mobile-drawer-cta { margin-top: auto; text-align: center; }
 
   main { flex: 1; display: flex; align-items: center; min-height: 70vh; }
   .contact-section { max-width: 760px; margin: 0 auto; padding: 64px 24px 100px; text-align: center; display: flex; flex-direction: column; gap: 28px; align-items: center; }
@@ -143,13 +123,9 @@
   }
   .contact-email:hover { transform: translateY(-2px); color: var(--color-accent-hover); text-decoration: none; }
   .contact-email:active { transform: translateY(0) scale(0.98); }
-  .contact-linkedin {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--color-accent); color: var(--color-dark);
-    font-weight: 600; font-size: 16px; padding: 16px 32px; border-radius: var(--radius-full); text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .contact-linkedin:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--color-dark); text-decoration: none; }
-  .contact-linkedin:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-sm); }
+  /* .contact-linkedin = .btn .btn-lg .btn-accent do DS */
+  .contact-linkedin { text-decoration: none; }
+  .contact-linkedin:hover { text-decoration: none; }
 
   .site-footer { background: var(--color-dark); color: rgba(255, 255, 255, .85); padding: 48px 24px 32px; }
   .footer-top { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
@@ -170,7 +146,7 @@
 
   @media (max-width: 640px) {
     :root { --text-h1: var(--text-h1-mobile); --text-h2: var(--text-h2-mobile); }
-    .nav-links, .navbar-actions .lang-toggle, .navbar-actions .cta-btn { display: none; }
+    .nav-links, .navbar-actions .lang-toggle, .navbar-actions .nav-cta { display: none; }
     .navbar-actions .menu-btn { display: flex; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -198,7 +174,7 @@
       </ul>
       <div class="navbar-actions">
         <button class="lang-toggle" id="langToggleTop"></button>
-        <a href="mailto:[EMAIL]" class="cta-btn" id="ctaTop"></a>
+        <a href="mailto:[EMAIL]" class="nav-cta" id="ctaTop"></a>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
           <span class="material-symbols-rounded" aria-hidden="true">menu</span>
         </button>
@@ -219,7 +195,7 @@
       <a href="contact.html" aria-current="page" class="active" id="drawerNavContact"></a>
     </nav>
     <button class="lang-toggle mobile-drawer-lang" id="langToggleDrawer"></button>
-    <a href="mailto:[EMAIL]" class="cta-btn mobile-drawer-cta" id="ctaDrawer"></a>
+    <a href="mailto:[EMAIL]" class="nav-cta mobile-cta" id="ctaDrawer"></a>
   </div>
 
   <main id="main">
@@ -227,7 +203,7 @@
       <h1 id="heading"></h1>
       <p class="intro" id="intro"></p>
       <a href="mailto:[EMAIL]" class="contact-email">[EMAIL]</a>
-      <a href="[LINK DO LINKEDIN]" target="_blank" rel="noopener" class="contact-linkedin">LinkedIn →</a>
+      <a href="[LINK DO LINKEDIN]" target="_blank" rel="noopener" class="btn btn-lg btn-accent contact-linkedin">LinkedIn →</a>
     </section>
   </main>
 
